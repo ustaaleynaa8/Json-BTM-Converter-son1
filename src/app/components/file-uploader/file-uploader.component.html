@@ -1,0 +1,184 @@
+<div class="file-uploader-container">
+    <h3 class="text-center">Dosya Yükleme Ayarları</h3>
+    <p class="text-center">Lütfen bir dosya seçin ve ayarlarınızı yapılandırın.</p>
+
+    <!-- Dosya Seçimi ve İptal Butonu -->
+    <div class="file-input-container">
+        <input id="csvFileInput"
+               type="file"
+               class="form-control"
+               (change)="onFileSelect($event)" />
+        <button *ngIf="selectedFile" class="cancel-btn" (click)="clearSelection()">X</button>
+    </div>
+
+    <!-- Seçilen Dosya Durumu -->
+    <div class="file-status">
+        <ng-container *ngIf="!selectedFile">
+            <p class="help-text">Henüz bir dosya seçilmedi.</p>
+        </ng-container>
+        <ng-container *ngIf="selectedFile">
+            <div class="selected-file">
+                <span class="file-name">{{ selectedFile.name }}</span>
+                <span class="file-size">({{ (selectedFile.size / 1024).toFixed(2) }} KB)</span>
+                <span class="file-type" [class.csv]="fileType === 'csv'" [class.txt]="fileType === 'txt'" [class.xml]="fileType === 'xml'">
+                    {{ fileType === 'csv' ? 'CSV DOSYASI' : fileType === 'txt' ? 'TXT DOSYASI' : 'XML DOSYASI' }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- Ayarlar Bölümü -->
+    <div *ngIf="selectedFile" class="options-section">
+        <!-- Dosya Türü Seçimi -->
+        <div class="option-item">
+            <div class="option-label">
+                <span class="option-text">Dosya Türü:</span>
+                <select class="delimiter-select" [(ngModel)]="fileType">
+                    <option [ngValue]="'csv'">CSV</option>
+                    <option [ngValue]="'txt'">TXT</option>
+                    <option [ngValue]="'xml'">XML</option>
+                </select>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- CSV Ayarları -->
+        <ng-container *ngIf="fileType === 'csv'">
+            <div class="option-item">
+                <label class="option-label">
+                    <input type="checkbox" class="option-checkbox" [(ngModel)]="hasHeader" (change)="onHeaderCheckboxChange()" />
+                    <span class="option-text">Başlık Satırı Var</span>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <input type="checkbox" class="option-checkbox" [(ngModel)]="skipEmptyLines" (change)="onSkipEmptyLinesChange()" />
+                    <span class="option-text">Boş Satırları Atla</span>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <span class="option-text">Değer Ayırıcı:</span>
+                    <select class="delimiter-select" [(ngModel)]="selectedDelimiter" (change)="onDelimiterChange()">
+                        <option *ngFor="let option of delimiterOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <span class="option-text">Satır Sonu Ayırıcı:</span>
+                    <select class="delimiter-select" [(ngModel)]="selectedRowDelimiter" (change)="onRowDelimiterChange()">
+                        <option *ngFor="let option of rowDelimiterOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <span class="option-text">Tırnak İşareti Kullanımı:</span>
+                    <select class="delimiter-select" [(ngModel)]="selectedQuoteOption" (change)="onQuoteOptionChange()">
+                        <option *ngFor="let option of quoteOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <span class="option-text">Dosya Kodlaması:</span>
+                    <select class="delimiter-select" [(ngModel)]="selectedEncoding" (change)="onEncodingChange()">
+                        <option *ngFor="let option of encodingOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <input type="checkbox" class="option-checkbox" [(ngModel)]="trimWhitespace" (change)="onTrimWhitespaceChange()" />
+                    <span class="option-text">Boşlukları Kırp</span>
+                </label>
+            </div>
+
+            <div class="option-item">
+                <label class="option-label">
+                    <input type="checkbox" class="option-checkbox" [(ngModel)]="doubleQuoteWrap" (change)="onDoubleQuoteWrapChange()" />
+                    <span class="option-text">Çift Tırnakla Sar</span>
+                </label>
+            </div>
+
+            <div class="prefix-suffix-section">
+                <div class="section-header">
+                    <h4>Satır Ön/Son Eki Ayarları</h4>
+                </div>
+                <div class="option-item">
+                    <label class="option-label">
+                        <span class="option-text">Satır Ön Eki (Prefix):</span>
+                        <input type="text" class="prefix-suffix-input" [(ngModel)]="rowPrefix" (input)="onRowPrefixChange()" placeholder="Örnek: #">
+                    </label>
+                </div>
+                <div class="option-item">
+                    <label class="option-label">
+                        <span class="option-text">Satır Son Eki (Suffix):</span>
+                        <input type="text" class="prefix-suffix-input" [(ngModel)]="rowSuffix" (input)="onRowSuffixChange()" placeholder="Örnek: EOF">
+                    </label>
+                </div>
+            </div>
+
+        </ng-container>
+
+        <!-- TXT Ayarları -->
+        <ng-container *ngIf="fileType === 'txt'">
+            <div class="txt-options">
+                <div class="option-item">
+                    <label class="option-label">
+                        <input type="checkbox" class="option-checkbox" [(ngModel)]="hasHeader" (change)="onHeaderCheckboxChange()" />
+                        <span class="option-text">Başlık Satırı Var</span>
+                    </label>
+                </div>
+
+                <div class="option-item">
+                    <label class="option-label">
+                        <input type="checkbox" class="option-checkbox" [(ngModel)]="skipEmptyLines" (change)="onSkipEmptyLinesChange()" />
+                        <span class="option-text">Boş Satırları Atla</span>
+                    </label>
+                </div>
+
+                <div class="option-item">
+                    <label class="option-label">
+                        <span class="option-text">Alan Sayısı:</span>
+                        <input type="number" class="number-input" [(ngModel)]="fieldCount" (input)="onFieldCountChange()" min="1" />
+                    </label>
+                </div>
+            </div>
+
+            <div *ngIf="fieldConfigs && fieldConfigs.length > 0" class="field-settings">
+                <h4>Alan Konfigürasyonları</h4>
+                <div class="field-config-row">
+                    <div *ngFor="let field of fieldConfigs; let i = index" class="field-config-item">
+                        <label class="option-label">
+                            <span class="option-text">Alan {{ i + 1 }} Başlangıç:</span>
+                            <input type="number" class="number-input" [(ngModel)]="fieldConfigs[i].start" (input)="onFieldConfigChange()" />
+                        </label>
+                        <label class="option-label mt-2">
+                            <span class="option-text">Alan {{ i + 1 }} Uzunluk:</span>
+                            <input type="number" class="number-input" [(ngModel)]="fieldConfigs[i].length" (input)="onFieldConfigChange()" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- İşlem Butonları -->
+    <div class="process-button-container">
+        <button (click)="processData()" [disabled]="isProcessing || !selectedFile" class="process-btn">
+            <span *ngIf="isProcessing" class="spinner"></span>
+            Dönüştür
+        </button>
+        <p *ngIf="isProcessing" class="processing">İşlem devam ediyor...</p>
+        <p *ngIf="!selectedFile" class="process-help-text">Lütfen bir dosya seçin.</p>
+    </div>
+</div>

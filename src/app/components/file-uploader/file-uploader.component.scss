@@ -1,0 +1,487 @@
+/* --- Genel Deðiþkenler ve Ayarlar --- */
+$primary-color: #007bff;
+$secondary-color: #666;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$light-bg: #f8f9fa;
+$white-bg: #fff;
+$border-color: #ddd;
+
+/* --- Temel HTML Elemanlarý --- */
+h3 {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+    color: $secondary-color;
+    text-align: center;
+}
+
+/* --- Ana Konteyner --- */
+.file-uploader-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: $white-bg;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- Dosya Giriþ Bölümü --- */
+.file-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid $border-color;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        }
+
+        &:disabled {
+            background-color: $light-bg;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    }
+}
+
+.cancel-btn {
+    position: absolute;
+    right: 10px;
+    background: $danger-color;
+    color: $white-bg;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    animation: fadeIn 0.3s ease-in;
+
+    &:hover {
+        background: darken($danger-color, 5%);
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba($danger-color, 0.3);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+/* --- Seçenekler Bölümü --- */
+.options-section {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: $light-bg;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    position: relative;
+}
+
+.option-item {
+    margin-bottom: 12px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    gap: 8px;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.option-checkbox {
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+.option-text {
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.delimiter-select {
+    padding: 6px 12px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: $white-bg;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    min-width: 150px;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+    }
+
+    &:disabled {
+        background-color: $light-bg;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+/* --- TXT'ye Özel Stiller --- */
+.txt-options {
+    border-top: 2px solid $primary-color;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.field-settings {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 6px;
+    border: 1px solid #bbdefb;
+
+    h4 {
+        margin: 0 0 15px 0;
+        color: #1976d2;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}
+
+.field-config-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.field-config-item {
+    flex: 1;
+    min-width: 200px;
+
+    .option-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+.number-input {
+    padding: 6px 12px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: $white-bg;
+    transition: border-color 0.3s ease;
+    min-width: 80px;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+    }
+
+    &:disabled {
+        background-color: $light-bg;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+/* --- Ön/Son Ek Ayarlarý --- */
+.prefix-suffix-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    border: 1px solid #b3d9ff;
+
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .option-text {
+        font-weight: 600;
+        min-width: 100px;
+    }
+}
+
+.section-header {
+    margin-bottom: 15px;
+
+    h4 {
+        margin: 0 0 8px 0;
+        color: #2c5aa0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}
+
+.prefix-suffix-input {
+    padding: 8px 12px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: $white-bg;
+    transition: border-color 0.3s ease;
+    min-width: 200px;
+    font-family: 'Courier New', monospace;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+    }
+
+    &:disabled {
+        background-color: $light-bg;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    &::placeholder {
+        color: #6c757d;
+        font-style: italic;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+}
+
+/* --- Dosya Durumu Mesajlarý --- */
+.file-status {
+    min-height: 24px;
+    margin-bottom: 15px;
+}
+
+.help-text {
+    color: $secondary-color;
+    font-size: 14px;
+    margin: 0;
+    font-style: italic;
+    text-align: center;
+}
+
+.selected-file {
+    color: $success-color;
+    font-size: 14px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .file-name {
+        font-weight: bold;
+    }
+
+    .file-size {
+        color: $secondary-color;
+        font-weight: normal;
+        font-size: 12px;
+    }
+
+    .file-type {
+        color: $white-bg;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 4px;
+
+        &.csv {
+            background-color: #007bff;
+        }
+
+        &.txt {
+            background-color: #198754;
+        }
+    }
+}
+
+.processing {
+    color: $primary-color;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+    animation: pulse 1.5s ease-in-out infinite;
+    text-align: center;
+}
+
+/* --- Ýþlem Butonu ve Alaný --- */
+.process-button-container {
+    margin: 20px 0 10px 0;
+    text-align: center;
+
+    .process-help-text {
+        margin: 8px 0 0 0;
+        font-size: 12px;
+        color: $secondary-color;
+        font-style: italic;
+        text-align: center;
+    }
+}
+
+.process-btn {
+    background-color: $success-color;
+    color: $white-bg;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba($success-color, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+
+    &:hover {
+        background-color: darken($success-color, 5%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba($success-color, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba($success-color, 0.2);
+    }
+
+    &:disabled {
+        background-color: lighten($secondary-color, 15%);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        opacity: 0.8;
+    }
+
+    .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid $white-bg;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+/* --- Animasyonlar --- */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Responsive Tasarým --- */
+@media (max-width: 768px) {
+    .cancel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .selected-file {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .option-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .delimiter-select, .prefix-suffix-input, .number-input {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .option-text {
+        min-width: unset;
+    }
+
+    .section-header h4 {
+        font-size: 14px;
+    }
+
+    .field-config-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .field-config-item {
+        min-width: unset;
+    }
+
+    .file-uploader-container {
+        padding: 1rem;
+    }
+
+    .process-btn {
+        width: 100%;
+    }
+}
