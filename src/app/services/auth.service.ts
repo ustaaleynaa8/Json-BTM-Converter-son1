@@ -2,19 +2,7 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
 import { type Observable, BehaviorSubject } from "rxjs"
 import { tap } from "rxjs/operators"
-
-export interface User {
-  id: string
-  username: string
-  email: string
-}
-
-export interface AuthResponse {
-  success: boolean
-  message: string
-  token?: string
-  user?: User
-}
+import { User, AuthResponse, LoginCredentials, RegisterData } from "../interfaces/auth.interface"
 
 @Injectable({
   providedIn: "root",

@@ -1,4 +1,4 @@
-/* --- Genel Deðiþkenler ve Ayarlar --- */
+/* --- Genel Deï¿½iï¿½kenler ve Ayarlar --- */
 $primary-color: #007bff;
 $secondary-color: #666;
 $success-color: #28a745;
@@ -7,7 +7,7 @@ $light-bg: #f8f9fa;
 $white-bg: #fff;
 $border-color: #ddd;
 
-/* --- Temel HTML Elemanlarý --- */
+/* --- Temel HTML ElemanlarÄ± --- */
 h3 {
     margin-bottom: 15px;
     color: #333;
@@ -31,7 +31,7 @@ p {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* --- Dosya Giriþ Bölümü --- */
+/* --- Dosya Giriï¿½ Bï¿½lï¿½mï¿½ --- */
 .file-input-container {
     position: relative;
     display: flex;
@@ -91,7 +91,7 @@ p {
     }
 }
 
-/* --- Seçenekler Bölümü --- */
+/* --- Seï¿½enekler Bï¿½lï¿½mï¿½ --- */
 .options-section {
     margin-top: 25px;
     margin-bottom: 15px;
@@ -160,7 +160,7 @@ p {
     }
 }
 
-/* --- TXT'ye Özel Stiller --- */
+/* --- TXT'ye ï¿½zel Stiller --- */
 .txt-options {
     border-top: 2px solid $primary-color;
     padding-top: 15px;
@@ -221,7 +221,7 @@ p {
     }
 }
 
-/* --- Ön/Son Ek Ayarlarý --- */
+/* --- ï¿½n/Son Ek Ayarlarï¿½ --- */
 .prefix-suffix-section {
     margin: 20px 0;
     padding: 15px;
@@ -281,7 +281,7 @@ p {
     }
 }
 
-/* --- Dosya Durumu Mesajlarý --- */
+/* --- Dosya Durumu Mesajlarï¿½ --- */
 .file-status {
     min-height: 24px;
     margin-bottom: 15px;
@@ -342,7 +342,7 @@ p {
     text-align: center;
 }
 
-/* --- Ýþlem Butonu ve Alaný --- */
+/* --- ï¿½ï¿½lem Butonu ve Alanï¿½ --- */
 .process-button-container {
     margin: 20px 0 10px 0;
     text-align: center;
@@ -357,8 +357,8 @@ p {
 }
 
 .process-btn {
-    background-color: $success-color;
-    color: $white-bg;
+    background-color: #c9d2d1;
+    color: #231F20;
     border: none;
     padding: 12px 24px;
     border-radius: 6px;
@@ -366,21 +366,21 @@ p {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba($success-color, 0.2);
+    box-shadow: 0 2px 4px rgba(201, 210, 209, 0.3);
     display: inline-flex;
     align-items: center;
     gap: 8px;
     justify-content: center;
 
     &:hover {
-        background-color: darken($success-color, 5%);
+        background-color: #b8c4c3;
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba($success-color, 0.3);
+        box-shadow: 0 4px 8px rgba(201, 210, 209, 0.4);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 4px rgba($success-color, 0.2);
+        box-shadow: 0 2px 4px rgba(201, 210, 209, 0.3);
     }
 
     &:disabled {
@@ -395,7 +395,7 @@ p {
         display: inline-block;
         width: 16px;
         height: 16px;
-        border: 2px solid $white-bg;
+        border: 2px solid #231F20;
         border-right-color: transparent;
         border-radius: 50%;
         animation: spin 1s linear infinite;
@@ -435,7 +435,7 @@ p {
     }
 }
 
-/* --- Responsive Tasarým --- */
+/* --- Responsive Tasarï¿½m --- */
 @media (max-width: 768px) {
     .cancel-btn {
         width: 32px;

@@ -1,0 +1,111 @@
+<div class="btm-results">
+  <h3>BTM İşlem Sonuçları</h3>
+  
+  <!-- Parameters & Header Tables -->
+  <div class="metadata-section">
+    <div class="metadata-tables">
+      <!-- Parameters Table -->
+      <div class="metadata-table" *ngIf="btmData.parametersData.length > 0">
+        <h4>Parametreler</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Parametre</th>
+              <th>Değer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let param of btmData.parametersData">
+              <td><strong>{{param.key}}</strong></td>
+              <td>{{param.value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Header Table -->
+      <div class="metadata-table" *ngIf="btmData.headerData.length > 0">
+        <h4>Header Bilgileri</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Alan</th>
+              <th>Değer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of btmData.headerData">
+              <td><strong>{{header.key}}</strong></td>
+              <td>{{header.value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- IBAN Accounts Table -->
+  <div class="data-section" *ngIf="btmData.ibanData.length > 0">
+    <h4>IBAN Hesap Bilgileri ({{btmData.ibanData.length}} kayıt)</h4>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th *ngFor="let header of ibanHeaders">{{header}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of btmData.ibanData; let i = index">
+            <td *ngFor="let header of ibanHeaders">{{row[header] || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Details Table -->
+  <div class="data-section" *ngIf="btmData.detailsData.length > 0">
+    <h4>Detay Bilgileri ({{btmData.detailsData.length}} kayıt)</h4>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th *ngFor="let header of detailsHeaders">{{header}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of btmData.detailsData; let i = index">
+            <td *ngFor="let header of detailsHeaders">{{row[header] || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Combined Data Table -->
+  <div class="data-section" *ngIf="filteredCombinedData && filteredCombinedData.length > 0">
+    <h4>Birleştirilmiş Veriler ({{filteredCombinedData.length}} kayıt)</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let header of combinedHeaders">{{header}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of filteredCombinedData; let i = index">
+            <td *ngFor="let header of combinedHeaders">{{row[header] || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- JSON Debug Section -->
+  <div class="json-debug-section">
+    <h4>BTM JSON Debug Output</h4>
+    <div class="json-container">
+      <pre class="json-content">{{JSON.stringify(getBtmJsonOutput(), null, 2)}}</pre>
+    </div>
+  </div>
+</div>

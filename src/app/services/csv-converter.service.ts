@@ -1,18 +1,6 @@
 import { Injectable } from "@angular/core"
 import { convertToUTF8 } from "src/app/utils/encoding-maps"
-
-export interface CsvOptions {
-  hasHeader: boolean
-  skipEmptyLines: boolean
-  selectedDelimiter: string
-  doubleQuoteWrap: boolean
-  selectedRowDelimiter: string
-  rowPrefix: string
-  rowSuffix: string
-  selectedEncoding: string
-  selectedQuoteOption: string
-  trimWhitespace: boolean
-}
+import { CsvOptions } from "../interfaces/table-data.interface"
 
 @Injectable({ providedIn: "root" })
 export class CsvConverterService {

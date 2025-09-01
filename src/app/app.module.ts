@@ -6,6 +6,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { AppComponent } from "./app.component"
 import { FileUploaderComponent } from "./components/file-uploader/file-uploader.component"
 import { DataTableComponent } from "./components/data-table/data-table.component"
+import { BtmDataDisplayComponent } from "./components/btm-data-display/btm-data-display.component"
 import { SearchFilterPipe } from "./pipes/search-filter.pipe"
 import { DashboardComponent } from "./components/dashboard/dashboard.component"
 import { LoginComponent } from "./components/login/login.component"
@@ -18,6 +19,7 @@ import { TxtToJsonService } from "./services/txt-to-json.service"
     AppComponent,
     FileUploaderComponent,
     DataTableComponent,
+    BtmDataDisplayComponent,
     SearchFilterPipe,
     DashboardComponent,
     LoginComponent,

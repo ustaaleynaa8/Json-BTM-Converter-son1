@@ -14,8 +14,8 @@ export class XmlBtmService {
     uploadXml(xml: string): Observable<string> {
         return this.http.post<string>(
             this.apiUrl,
-            xml, // 🔑 JSON değil; direkt ham XML string
-            { headers: this.headers, responseType: 'text' as 'json' } // 🔑 CSV text bekliyoruz
+            xml, //  JSON değil; direkt ham XML string
+            { headers: this.headers, responseType: 'text' as 'json' } //  CSV text bekliyoruz
         );
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CsvFileConverterService } from './csv-file-converter.service';
-import { CsvOptions } from './csv-converter.service';
+import { CsvOptions } from '../interfaces/table-data.interface';
 import { XmlBtmService } from './xml-btm.service';
 import { FileConverterService } from './file-converter.service';
 import { catchError, throwError, firstValueFrom, timeout } from 'rxjs';
@@ -12,6 +12,10 @@ export interface OrchestratedResult {
   via: string;
   parametersData: Array<{ key: string; value: string }>;
   headerData: Array<{ key: string; value: string }>;
+  ibanData?: any[];
+  detailsData?: any[];
+  combinedData?: any[];
+  isBtmResult?: boolean;
 }
 
 export interface BtmTransformResult {
@@ -64,13 +68,20 @@ export class BtmOrchestratorService {
         // Tablo başlıkları için sadece anlamlı anahtarları topla
         const properties = this.extractMeaningfulProperties(btmResult.processedData);
 
+        const ibanGroups = this.groupByTypeAsObjects(btmResult.rawRows, 'IbanHesap');
+        const detailGroups = this.groupByTypeAsObjects(btmResult.rawRows, 'Details');
+
         return {
           result: btmResult.processedData,
           properties,
           prettyJson: btmResult.processedData,
           via: 'btm_grouped_final',
           parametersData: btmResult.parametersData,
-          headerData: btmResult.headerData
+          headerData: btmResult.headerData,
+          ibanData: ibanGroups,
+          detailsData: detailGroups,
+          combinedData: btmResult.processedData, // Birleştirilmiş veriyi ekle
+          isBtmResult: true
         };
       }
 
@@ -91,7 +102,11 @@ export class BtmOrchestratorService {
           prettyJson: localResult.result,
           via: 'local',
           parametersData: [],
-          headerData: []
+          headerData: [],
+          ibanData: [],
+          detailsData: [],
+          combinedData: localResult.result, // Local sonucu da combinedData'ya ekle
+          isBtmResult: false
         };
       } catch (localErr: any) {
         // Hem BTM hem local başarısız olduysa, daha detaylı hata ver

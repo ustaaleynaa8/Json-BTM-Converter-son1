@@ -13,13 +13,15 @@ export class DataTableComponent {
   @Input() hasHeader = true // New input to know if file has header
   @Input() showQuotes = false // New input to know if quotes should be visible
   @Input() fileType: 'csv' | 'txt' | 'xml' | null = null;
-// Input to know the file type
+
+  // Public JSON property for template access
+  public JSON = JSON;
 
   // Limit display to first 10000 rows for performance
   private readonly MAX_DISPLAY_ROWS = 10000
 
   /**
-   * Get data limited to first 1000 rows for display performance
+   * Get data limited to first 10000 rows for display performance
    * @returns Limited array of data for display
    */
   get displayData(): any[] {
@@ -28,7 +30,7 @@ export class DataTableComponent {
 
   /**
    * Check if data is truncated for display
-   * @returns True if data has more than 1000 rows
+   * @returns True if data has more than 10000 rows
    */
   get isDataTruncated(): boolean {
     return this.data.length > this.MAX_DISPLAY_ROWS
@@ -55,6 +57,7 @@ export class DataTableComponent {
   getFormattedJson(): string {
     return JSON.stringify(this.filteredData, null, 2)
   }
+
   /**
    * Format cell value based on file type and options
    * @param value The cell value to format

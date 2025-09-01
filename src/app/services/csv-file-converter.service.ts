@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core"
-import { CsvConverterService, CsvOptions } from "./csv-converter.service"
+import { CsvConverterService } from "./csv-converter.service"
+import { CsvOptions } from "../interfaces/table-data.interface"
 import { IFileConverter } from "../interfaces/ifile-converter"
 
 @Injectable({

@@ -23,9 +23,9 @@
                                    (onFileClear)="onFileClear()"
                                    (onOptionsChange)="onOptionsChanged($event)">
                 </app-file-uploader>
-                <!-- XML Ayarlarý Paneli (gizlenmiþ) -->
+                <!-- XML AyarlarÄ± Paneli (gizlenmiÅŸ) -->
                 <div *ngIf="false">
-                    <!-- XML paneli buradaydýysa artýk görünmez -->
+                    <!-- XML paneli buradaydaysa artÄ±k gÃ¶rÃ¼nmez -->
                 </div>
                 <!-- Send to Backend Button -->
                 <div *ngIf="jsonData.length > 0" style="margin-top: 20px;">
@@ -34,21 +34,31 @@
                     </button>
                 </div>
             </div>
-            <!-- Search and Data Table -->
-            <div class="card" *ngIf="jsonData.length > 0">
-                <div class="search-box">
+            <!-- Search and Data Display -->
+            <div class="card" *ngIf="jsonData.length > 0 || isBtmResult">
+                <div class="search-box" *ngIf="!isBtmResult">
                     <input type="text"
                            class="form-control"
                            [(ngModel)]="searchTerm"
                            placeholder="Search in table data...">
                 </div>
-                <!-- Data Table Component -->
-                <app-data-table [data]="jsonData"
-                                [headers]="tableHeaders"
-                                [searchTerm]="searchTerm"
-                                [hasHeader]="csvOptions.hasHeader"
-                                [showQuotes]="!csvOptions.doubleQuoteWrap"
-                                [fileType]="currentFileType">
+                
+                <!-- BTM Data Display -->
+                <app-btm-data-display 
+                    *ngIf="isBtmResult && btmDisplayData"
+                    [btmData]="btmDisplayData"
+                    [searchTerm]="searchTerm">
+                </app-btm-data-display>
+                
+                <!-- Regular Data Table -->
+                <app-data-table 
+                    *ngIf="!isBtmResult"
+                    [data]="jsonData"
+                    [headers]="tableHeaders"
+                    [searchTerm]="searchTerm"
+                    [hasHeader]="csvOptions.hasHeader"
+                    [showQuotes]="!csvOptions.doubleQuoteWrap"
+                    [fileType]="currentFileType">
                 </app-data-table>
             </div>
         </div>

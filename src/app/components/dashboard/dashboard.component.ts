@@ -1,13 +1,11 @@
 import { Component, OnInit } from "@angular/core"
-import { AuthService, User } from "../../services/auth.service"
+import { AuthService } from "../../services/auth.service"
 import { DatabaseService } from "../../services/database.service"
 import { Router } from "@angular/router"
 import { TxtToJsonOptions } from "src/app/services/txt-to-json.service"
-import { CsvOptions } from "src/app/services/csv-converter.service"
-
-interface TableData {
-    [key: string]: any
-}
+import { TableData, CsvOptions, FileConversionResult } from "../../interfaces/table-data.interface"
+import { BtmDisplayData } from "../../interfaces/btm-data.interface"
+import { User } from "../../interfaces/auth.interface"
 
 @Component({
     selector: "app-dashboard",
@@ -20,6 +18,10 @@ export class DashboardComponent implements OnInit {
     jsonData: TableData[] = []
     tableHeaders: string[] = []
     searchTerm = ""
+
+    // BTM specific data - structured for the BTM component
+    btmDisplayData: BtmDisplayData | null = null
+    isBtmResult: boolean = false
 
     currentFileType: "csv" | "txt" | "xml" | null = null
 
@@ -76,6 +78,27 @@ export class DashboardComponent implements OnInit {
         this.tableHeaders = result.properties || result.headers || []
         this.currentFileType = result.type || "csv" // default csv olarak işaretliyoruz
 
+        // BTM specific data handling
+        if (result.isBtmResult) {
+            this.isBtmResult = true
+            this.btmDisplayData = {
+                parametersData: result.parametersData || [],
+                headerData: result.headerData || [],
+                ibanData: result.ibanData || [],
+                detailsData: result.detailsData || [],
+                combinedData: this.jsonData
+            }
+            console.log("BTM result processed:", {
+                parameters: this.btmDisplayData.parametersData.length,
+                headers: this.btmDisplayData.headerData.length,
+                iban: this.btmDisplayData.ibanData.length,
+                details: this.btmDisplayData.detailsData.length
+            })
+        } else {
+            this.isBtmResult = false
+            this.btmDisplayData = null
+        }
+
         if (!Array.isArray(this.jsonData)) {
             console.error("Geçersiz jsonData formatı:", this.jsonData)
             this.onConversionError("Veri okunamadı veya biçim hatalı.")
@@ -96,6 +119,10 @@ export class DashboardComponent implements OnInit {
         this.tableHeaders = []
         this.searchTerm = ""
         this.currentFileType = null
+        
+        // Clear BTM specific data
+        this.isBtmResult = false
+        this.btmDisplayData = null
     }
 
     onOptionsChanged(options: any): void {

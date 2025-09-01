@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CsvOptions } from 'src/app/services/csv-converter.service';
+import { CsvOptions } from '../../interfaces/table-data.interface';
 import { TxtToJsonOptions } from 'src/app/services/txt-to-json.service';
 import { FileConverterService } from 'src/app/services/file-converter.service';
 import { XmlBtmService } from 'src/app/services/xml-btm.service';
@@ -145,6 +145,12 @@ export class FileUploaderComponent {
                 this.onConvert.emit({
                     result: res.result,
                     properties: res.properties,
+                    type: 'xml',
+                    parametersData: res.parametersData,
+                    headerData: res.headerData,
+                    ibanData: res.ibanData,
+                    detailsData: res.detailsData,
+                    isBtmResult: res.isBtmResult,
                     ...(res.prettyJson ? { prettyJson: res.prettyJson } : {})
                 });
                 return;
