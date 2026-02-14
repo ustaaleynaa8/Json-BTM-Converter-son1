@@ -121,4 +121,11 @@ export const environment = {
 - Büyük dosyalar için progress indicator
 - Hatalı CSV formatları için parsing fallback
 
+### Ekip & Roller
+
+-Aleyna Usta – XML Converter geliştirme, projelerin birleştirilmesi ve BTM entegrasyonu
+-İris Akdemir – CSV → JSON dönüştürme modülü
+-Burak Uran – TXT → JSON dönüştürme modülü
+-Oğulcan Erdoğan – BTM servis geliştirme
+
 
